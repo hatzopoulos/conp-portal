@@ -37936,6 +37936,38 @@ function DatasetElement_objectWithoutPropertiesLoose(source, excluded) { if (sou
 
 
 
+
+// Presentation for each provisional NeuroLibre/Evidence publication tier.
+// The tiers are nested: each implies the capabilities of the ones below it, so
+// the wording states the strongest claim that is true of that tier. Unknown or
+// absent types fall back to a neutral description that over-claims nothing.
+var EVIDENCE_TIERS = {
+  "wired": {
+    accent: "#90c37f",
+    wash: "#f4f7f3",
+    blurb: "a live publication — figures connected to their data, and analyses you can re-run"
+  },
+  "re-executable": {
+    accent: "#4d6e8e",
+    wash: "#f2f5f8",
+    blurb: "an archived publication whose analyses you can re-run"
+  },
+  "interactive": {
+    accent: "#488099",
+    wash: "#f2f6f8",
+    blurb: "an archived publication with interactive figures"
+  },
+  "archived": {
+    accent: "#7a8494",
+    wash: "#f5f6f7",
+    blurb: "an archived, citable publication bundle"
+  }
+};
+var EVIDENCE_FALLBACK = {
+  accent: "#4d6e8e",
+  wash: "#f2f5f8",
+  blurb: "an archived publication bundle"
+};
 var DatasetElement_DatasetElement = function DatasetElement(props) {
   var _element$origin, _element$origin2;
   var authorized = props.authorized,
@@ -37957,6 +37989,7 @@ var DatasetElement_DatasetElement = function DatasetElement(props) {
     cbrainModalOpen = _useState5[0],
     setCbrainModalOpen = _useState5[1];
   var statusCONP = imagePath + "/canada.svg";
+  var evidenceTier = EVIDENCE_TIERS[(element.evidencePublicationType || "").toLowerCase()] || EVIDENCE_FALLBACK;
   var authIcons = [];
   switch (element.authorizations) {
     case "restricted":
@@ -38231,7 +38264,51 @@ var DatasetElement_DatasetElement = function DatasetElement(props) {
     href: element.registrationPage,
     role: "button",
     className: "btn btn-success m-1"
-  }, "Offsite Download")))))), downloadModalOpen ? /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_default.a.createElement(DatasetElement_DownloadModalWindowElement, {
+  }, "Offsite Download")))))), element.evidencePublication ? /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_default.a.createElement("a", {
+    href: "https://doi.org/" + element.evidencePublication,
+    target: "_blank",
+    rel: "noopener noreferrer",
+    className: "d-flex align-items-center text-decoration-none",
+    style: {
+      gap: "10px",
+      margin: "6px 8px 2px",
+      background: "linear-gradient(90deg, " + evidenceTier.wash + ", #ffffff)",
+      border: "1px solid " + evidenceTier.accent,
+      borderLeft: "4px solid " + evidenceTier.accent,
+      borderRadius: "4px",
+      padding: "7px 12px",
+      fontSize: "13px",
+      color: "#394459"
+    }
+  }, /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_default.a.createElement("img", {
+    src: "static/img/evidence_logo.svg",
+    alt: "Evidence logo",
+    style: {
+      width: "26px",
+      height: "26px",
+      marginRight: "10px"
+    }
+  }), element.evidencePublicationType ? /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_default.a.createElement("span", {
+    style: {
+      background: "#394459",
+      color: "#ffffff",
+      fontSize: "10.5px",
+      fontWeight: 700,
+      letterSpacing: "0.05em",
+      borderRadius: "3px",
+      padding: "3px 9px",
+      marginRight: "10px",
+      whiteSpace: "nowrap",
+      textTransform: "uppercase"
+    }
+  }, element.evidencePublicationType) : null, /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_default.a.createElement("span", null, /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_default.a.createElement("strong", null, "NeuroLibre/Evidence publication"), " \u2014 this dataset is part of", " ", evidenceTier.blurb), /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_default.a.createElement("span", {
+    style: {
+      marginLeft: "auto",
+      fontSize: "11.5px",
+      color: "#7a8494",
+      whiteSpace: "nowrap"
+    }
+  }, "doi ", element.evidencePublication, " \u2197")) : null, downloadModalOpen ? /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_default.a.createElement(DatasetElement_DownloadModalWindowElement, {
     size: element.size,
     zipLocation: element.zipLocation
   }) : null, cbrainModalOpen ? /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_default.a.createElement(src_CbrainModalDataset, {
@@ -38264,6 +38341,8 @@ DatasetElement_DatasetElement.propTypes = {
   cbrain_id: prop_types_default.a.string,
   cbrainIds: prop_types_default.a.arrayOf(prop_types_default.a.Object),
   ark_id: prop_types_default.a.string,
+  evidencePublication: prop_types_default.a.string,
+  evidencePublicationType: prop_types_default.a.string,
   zipLocation: prop_types_default.a.string,
   showDownloadButton: prop_types_default.a.bool
 };
