@@ -38268,7 +38268,7 @@ var DatasetElement_DatasetElement = function DatasetElement(props) {
     href: "https://doi.org/" + element.evidencePublication,
     target: "_blank",
     rel: "noopener noreferrer",
-    className: "d-flex align-items-center text-decoration-none",
+    className: "d-flex align-items-center text-decoration-none col-12 col-lg-9 px-0",
     style: {
       gap: "10px",
       margin: "6px 8px 10px",
@@ -38284,8 +38284,8 @@ var DatasetElement_DatasetElement = function DatasetElement(props) {
     src: "static/img/evidence_logo.svg",
     alt: "Evidence logo",
     style: {
-      width: "26px",
-      height: "26px",
+      width: "32px",
+      height: "32px",
       marginRight: "10px"
     }
   }), element.evidencePublicationType ? /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_default.a.createElement("span", {
@@ -38301,14 +38301,7 @@ var DatasetElement_DatasetElement = function DatasetElement(props) {
       whiteSpace: "nowrap",
       textTransform: "uppercase"
     }
-  }, element.evidencePublicationType) : null, /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_default.a.createElement("span", null, /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_default.a.createElement("strong", null, "NeuroLibre/Evidence publication"), " \u2014 this dataset is part of", " ", evidenceTier.blurb), /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_default.a.createElement("span", {
-    style: {
-      marginLeft: "auto",
-      fontSize: "11.5px",
-      color: "#7a8494",
-      whiteSpace: "nowrap"
-    }
-  }, "doi ", element.evidencePublication, " \u2197")) : null, downloadModalOpen ? /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_default.a.createElement(DatasetElement_DownloadModalWindowElement, {
+  }, element.evidencePublicationType) : null, /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_default.a.createElement("span", null, /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_default.a.createElement("strong", null, "NeuroLibre/Evidence publication"), " \u2014 this dataset is part of", " ", evidenceTier.blurb)) : null, downloadModalOpen ? /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_default.a.createElement(DatasetElement_DownloadModalWindowElement, {
     size: element.size,
     zipLocation: element.zipLocation
   }) : null, cbrainModalOpen ? /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_default.a.createElement(src_CbrainModalDataset, {

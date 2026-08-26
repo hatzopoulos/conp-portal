@@ -556,7 +556,7 @@ def dataset_search():
             },
             {
                 "key": "evidencePublication",
-                "label": "NeuroLibre/Evidence Publication First"
+                "label": "Has NeuroLibre/Evidence Publication first"
             }
         ],
         "filterKeys": [
