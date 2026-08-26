@@ -395,7 +395,7 @@ const DatasetElement = (props) => {
           className="d-flex align-items-center text-decoration-none"
           style={{
             gap: "10px",
-            margin: "6px 8px 2px",
+            margin: "6px 8px 10px",
             background: `linear-gradient(90deg, ${evidenceTier.wash}, #ffffff)`,
             border: `1px solid ${evidenceTier.accent}`,
             borderLeft: `4px solid ${evidenceTier.accent}`,
