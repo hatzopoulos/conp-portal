@@ -1,29 +1,41 @@
 
 # CONP Portal 
-[![Build Status](https://travis-ci.org/CONP-PCNO/conp-portal.svg?branch=master)](https://travis-ci.org/CONP-PCNO/conp-portal)
 [![Coverage Status](https://coveralls.io/repos/github/CONP-PCNO/conp-portal/badge.svg?branch=master)](https://coveralls.io/github/CONP-PCNO/conp-portal?branch=master)
+
+## Installation
+
 ### Requirements
 
-This code requires Python 3.7 
+This code requires Python 3.12. To check 
+the version(s) you may have installed 
+open a terminal and type `python3 -V`.
 
-### Python Virtual Environment
 
-Create a Python virtual environment called `venv` and install Flask dependencies
+### Clone the repository
+
+    git clone ... new-directory
+    cd new-directory 
+
+### Setup Python Virtual Environment
+
+Create a Python virtual environment called `.venv` 
+and install the python dependencies.
 
 In the top level directory:
 
-```shell
-python3 -m venv venv
-source venv/bin/activate
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 ```
+
 ### Initialize the flask environment
 
 You can set environment variables in the .flaskenv file.  A template is provided for you to start from.
 
 In the top level directory:
 
-```shell
+```bash
 cp flaskenv.template .flaskenv
 ```
 
@@ -44,7 +56,7 @@ We provide some initial data for you to create a functioning database for testin
 
 In the top level directory:
 
-```shell
+```bash
 flask db upgrade
 flask seed_test_db
 flask update_pipeline_data
@@ -55,7 +67,7 @@ flask seed_test_experiments
 
 In the top level directory:
 
-```shell
+```bash
 flask run
 ```
 
@@ -92,7 +104,7 @@ Some experimental testing cases are being explored with AWS Cloud 9.
 To run the application on a Cloud9 instance:
 
 ```bash
-    flask run --host=0.0.0.0 --port=8080
+flask run --host=0.0.0.0 --port=8080
 ```
 
 ### Deployment
