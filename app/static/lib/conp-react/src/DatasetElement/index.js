@@ -430,7 +430,10 @@ const DatasetElement = (props) => {
           ) : null}
           <span>
             <strong>NeuroLibre/Evidence publication</strong> — this dataset is part of{" "}
-            {evidenceTier.blurb}
+            {evidenceTier.blurb}{" "}
+            <span aria-hidden="true" style={{ color: "#7a8494", whiteSpace: "nowrap" }}>
+              ↗
+            </span>
           </span>
         </a>
       ) : null}
