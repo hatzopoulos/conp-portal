@@ -392,7 +392,7 @@ const DatasetElement = (props) => {
           href={`https://doi.org/${element.evidencePublication}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="d-flex align-items-center text-decoration-none"
+          className="d-flex align-items-center text-decoration-none col-12 col-lg-9 px-0"
           style={{
             gap: "10px",
             margin: "6px 8px 10px",
@@ -408,7 +408,7 @@ const DatasetElement = (props) => {
           <img
             src="static/img/evidence_logo.svg"
             alt="Evidence logo"
-            style={{ width: "26px", height: "26px", marginRight: "10px" }}
+            style={{ width: "32px", height: "32px", marginRight: "10px" }}
           />
           {element.evidencePublicationType ? (
             <span
@@ -430,10 +430,10 @@ const DatasetElement = (props) => {
           ) : null}
           <span>
             <strong>NeuroLibre/Evidence publication</strong> — this dataset is part of{" "}
-            {evidenceTier.blurb}
-          </span>
-          <span style={{ marginLeft: "auto", fontSize: "11.5px", color: "#7a8494", whiteSpace: "nowrap" }}>
-            doi {element.evidencePublication} ↗
+            {evidenceTier.blurb}{" "}
+            <span aria-hidden="true" style={{ color: "#7a8494", whiteSpace: "nowrap" }}>
+              ↗
+            </span>
           </span>
         </a>
       ) : null}
