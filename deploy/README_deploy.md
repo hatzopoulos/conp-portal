@@ -8,13 +8,7 @@ These instructions pertain to an Ubuntu 18.04, with NGINX
 
 ### Host information
 
-The portal is deployed on `portal.conp.ca`.
-
-It is an internal machine, so you will need to ssh to it internally.  Credentials and info will be given to appropriate personnel.
-
-The production server uses mariadb which is hosted by the MCIN. Credentials will be distributed to appropriate personnel.
-
-You will need sudo and access to the user `conp-admin` on the machine.
+The portal is deployed on `portal.conp.ca`. The production server is an internal machine that uses MariaDB. Access to it is via `ssh` to which credentials and info will be given to appropriate personnel from MCIN IT Services via Redmine. You will need sudo and access to the user `conp-admin` on the machine.
 
 ### GUNICORN
 
@@ -22,7 +16,7 @@ Part of the `requirments.txt` installs the appropriate python packages. The serv
 
 ### Source Code
 
-The source code is deployed under the `conp-admin` user in the `conp-portal` directory, the current version of the software can be obtained from `git status`. There is a `.flaskenv` file that has the unique settings for the portal, with access being given to approprate folks.
+The source code is deployed under the `conp-admin` user in the `conp-portal` directory. There is a `.flaskenv` file that has the unique settings for the portal, with access being given to approprate folks.
 
 NOTE: The package Flask-Dance required a modification to ensure that redirect urls used the https protocol.  So this has been forked into the CONP-PCNO team and the requirements.txt has been updated to install from here.
 
@@ -64,7 +58,3 @@ For example, to restart the NGINX service:
 
 1. `sudo systemctl start gunicron.socket`
 2. `sudo systemctl start nginx`
-
-
-
-
