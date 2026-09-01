@@ -63,6 +63,8 @@ flask update_pipeline_data
 flask seed_test_experiments
 ```
 
+If using a python environment, try `./venv/bin/python3 -m flask update_datasets` instead.
+
 ### Run Application
 
 In the top level directory:
