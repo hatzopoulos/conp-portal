@@ -4,9 +4,14 @@ __pycache__
 *.pyc
 .vscode
 venv
+.venv/
+.venv3*/
 env
+.env
 logs
 .flaskenv
 *.db
-.python_version
 data/
+app/static/data
+# Whoosh full-text search index
+index/
