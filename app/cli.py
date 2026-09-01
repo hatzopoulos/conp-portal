@@ -52,6 +52,9 @@ def register(app):
 
     @app.cli.command("seed_test_experiments")
     def seed_test_experiments():
+        """
+        Wrapper to update experiments from the conp-experiments repository
+        """
         _update_experiments(app)
 
     @app.cli.command('update_pipeline_data')
@@ -1076,6 +1079,9 @@ def _get_repo_analytics(app, repo):
     """
 
     from github import Github
+    # https://github.com/pygithub/pygithub
+    # https://pygithub.readthedocs.io/en/stable/
+    # @todo: remove PyGithub dependency. the only place this is used is g.get_repo
 
     token = app.config['GITHUB_PAT']
     g = Github(token)
