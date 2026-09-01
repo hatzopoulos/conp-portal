@@ -109,7 +109,7 @@ flask run --host=0.0.0.0 --port=8080
 
 ### Deployment
     
-This flask application is deployed on Heroku. More information will be available soon
+See [deploy/README_deploy.md](deploy/README_deploy.md)
 
 ### Docker
 
