@@ -18,8 +18,6 @@ Part of the `requirments.txt` installs the appropriate python packages. The serv
 
 The source code is deployed under the `conp-admin` user in the `conp-portal` directory. There is a `.flaskenv` file that has the unique settings for the portal, with access being given to approprate folks.
 
-NOTE: The package Flask-Dance required a modification to ensure that redirect urls used the https protocol.  So this has been forked into the CONP-PCNO team and the requirements.txt has been updated to install from here.
-
 ### systemctl files
 
 In the `systemctl_files/` directory are the scripts to add to the `/etc/systemd/system` directory.  There are two files:

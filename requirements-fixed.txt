@@ -151,4 +151,10 @@ pytest==8.3.5 ## Prod
 # pytest==9.1.1
 
 ## Historic Record ####################################################
+
 # Flask-DotEnv==0.1.1 ## obsolete. Flask natively supports environment variables using the package python-dotenv, rather than the older Flask-DotEnv extension.
+
+# The package Flask-Dance required a modification to ensure that
+# redirect urls used the https protocol.  So this was forked into
+# the CONP-PCNO team and the requirements.txt was updated to install
+# from that repo. This is not the case anymore.
