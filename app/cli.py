@@ -1074,6 +1074,9 @@ def _get_repo_analytics(app, repo):
     """
 
     from github import Github
+    # https://github.com/pygithub/pygithub
+    # https://pygithub.readthedocs.io/en/stable/
+    # @todo: remove PyGithub dependency. the only place this is used is g.get_repo
 
     token = app.config['GITHUB_PAT']
     g = Github(token)
