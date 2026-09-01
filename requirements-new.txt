@@ -32,7 +32,7 @@ flask==3.1.3
 Flask-Admin==1.5.3
 Flask-Bootstrap4==4.0.2
 Flask-Dance==3.0.0
-Flask-DotEnv==0.1.1
+Flask-DotEnv==0.1.1 ## obsolete. Flask natively supports environment variables using the package python-dotenv, rather than the older Flask-DotEnv extension.
 Flask-Ext==0.1
 Flask-Login==0.6.3
 Flask-Mail==0.9.1
