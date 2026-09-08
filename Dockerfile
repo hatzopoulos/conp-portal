@@ -1,4 +1,5 @@
-FROM python:3.7
+ARG PYTHON_VERSION=3.14
+FROM python:${PYTHON_VERSION}
 WORKDIR /app
 RUN apt-get update -y
 RUN apt-get install -y sqlite3 git-annex
