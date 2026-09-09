@@ -2,7 +2,7 @@
 
 [project]
 name = "conp-portal"
-version = "0.1.0"
+version = "1.1.0"
 description = "The Canadian Open Neuroscience Platform (CONP) Portal is a web interface that facilitates open science for the neuroscience community by simplifying global access to and sharing of datasets and tools. The Portal internalizes the typical data cycle of a research project, beginning with data acquisition, followed by data processing with published tools, and ultimately the publication of results with a link to the original dataset."
 readme = "README.md"
 requires-python = ">=3.12"
@@ -26,7 +26,6 @@ dependencies = [
     "gitpython==3.1.41",
     "markupsafe==2.1.5",
     "pygithub==1.44.1",
-    "pytest==8.3.5",
     "python-dateutil==2.8.0",
     "python-dotenv==1.1.1",
     "pytz==2018.9",
@@ -41,5 +40,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "deptry>=0.25.1",
+    "prek>=0.5.2",
     "pytest==8.3.5",
 ]
