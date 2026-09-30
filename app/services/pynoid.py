@@ -8,7 +8,7 @@ GENTYPES = ['r', 's', 'z']
 DIGTYPES = ['d', 'e']
 SHORT = ''
 VERSION = 'pynoid 0.1'
-
+NOLIMIT = float('inf')
 
 def mint(template='zek', n=None, scheme=None, naa=None):
     """
@@ -49,7 +49,7 @@ nn
 
     try:
         __validateMask(mask)
-    except:
+    except Exception:
         raise
 
     if n == None:
@@ -167,7 +167,7 @@ def __checkdigit(s):
     def ordinal(x):
         try:
             return XDIGIT.index(x)
-        except:
+        except ValueError:
             return 0
 
     return XDIGIT[sum([x * (i + 1) for i, x in enumerate(map(ordinal, s))]) % len(XDIGIT)]
