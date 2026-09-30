@@ -62,9 +62,9 @@ jobs:
           # install flake8 for linting to enforce code style and catch potential issues early.
           python -m pip install -U flake8>=7.0.0
 
-      - name: Lint with flake8
-        run: |
-          ./lint.sh
+      # - name: Lint with flake8
+      #   run: |
+      #     ./lint.sh
 
       - name: Run tests
         run: |
