@@ -1,6 +1,5 @@
 import json
-from whoosh.analysis import Tokenizer, Token
-from whoosh.compat import text_type
+
 from whoosh.analysis import RegexTokenizer
 
 

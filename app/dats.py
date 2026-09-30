@@ -1,7 +1,6 @@
 import fnmatch
 import json
 import os
-from typing import Optional
 
 
 class DATSObject:
@@ -10,7 +9,7 @@ class DATSObject:
           store the datsetopath and tries to find a DATS.json file
         """
         if not os.path.isdir(datasetpath):
-            raise RuntimeError('No dataset found at {}'.format(datasetpath))
+            raise RuntimeError(f'No dataset found at {datasetpath}')
 
         self.datasetpath = datasetpath
 
@@ -18,7 +17,7 @@ class DATSObject:
             try:
                 self.descriptor = json.load(f)
             except Exception:
-                raise RuntimeError('Can`t parse {}'.format(self.DatsFilepath))
+                raise RuntimeError(f'Can`t parse {self.DatsFilepath}')
 
     @property
     def name(self):
@@ -27,7 +26,7 @@ class DATSObject:
     @property
     def DatsFilepath(self):
         dirs = os.listdir(self.datasetpath)
-        descriptor: Optional[str] = None
+        descriptor: str | None = None
         for file in dirs:
             if fnmatch.fnmatch(file.lower(), 'dats.json'):
                 descriptor = os.path.join(self.datasetpath, file)
@@ -59,7 +58,7 @@ class DATSObject:
     @property
     def ReadmeFilepath(self):
         dirs = os.listdir(self.datasetpath)
-        readme: Optional[str] = None
+        readme: str | None = None
         for file in dirs:
             if fnmatch.fnmatch(file.lower(), 'readme.md'):
                 readme = os.path.join(self.datasetpath, file)
@@ -187,7 +186,7 @@ class DATSObject:
         else:
             auth = None
 
-        return "{}".format(auth)
+        return f"{auth}"
 
     @property
     def origin(self):
@@ -321,7 +320,7 @@ class DATSObject:
         size = round(size, 1)
         unit = units[units.index(unit) + count]
 
-        return "{} {}".format(size, unit)
+        return f"{size} {unit}"
 
     @ property
     def sources(self):
@@ -339,7 +338,7 @@ class DATSObject:
 
         sources = dist.get('access', {}).get('landingPage', '')
 
-        return "{}".format(sources)
+        return f"{sources}"
 
     @ property
     def dimensions(self):

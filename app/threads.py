@@ -1,14 +1,14 @@
-# -*- coding: utf-8 -*-
 """Threading Module
 
 Module that contains the threaded pipeline searching functions
 """
-from boutiques.searcher import Searcher
-from boutiques.puller import Puller
-import threading
 import json
-import os
 import logging
+import os
+import threading
+
+from boutiques.puller import Puller
+from boutiques.searcher import Searcher
 
 
 class UpdatePipelineData(threading.Thread):
@@ -17,7 +17,7 @@ class UpdatePipelineData(threading.Thread):
         registrty from Zenodo
     """
     def __init__(self):
-        super(UpdatePipelineData, self).__init__()
+        super().__init__()
         if not os.path.exists('logs'):
             os.makedirs('logs')
         logging.basicConfig(filename='logs/update_pipeline_thread.log', level=logging.INFO)
@@ -48,4 +48,4 @@ class UpdatePipelineData(threading.Thread):
                 json.dump(detailed_all_descriptors, f, indent=4)
 
         except Exception as e:
-            logging.exception("An exception occurred in the thread:{0}.".format(e))
+            logging.exception(f"An exception occurred in the thread:{e}.")

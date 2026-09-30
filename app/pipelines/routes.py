@@ -1,14 +1,16 @@
-# -*- coding: utf-8 -*-
 """ Routes Module
 
     Currently this module contains all of the routes for the pipelines blueprint
 """
 import json
 import os
+
 from flask import render_template, request, url_for
 from flask_login import current_user
-from app.pipelines import pipelines_bp, pipelines as pipelines_utils
+
 from app.models import ArkId
+from app.pipelines import pipelines as pipelines_utils
+from app.pipelines import pipelines_bp
 
 
 @pipelines_bp.route('/pipelines', methods=['GET'])
@@ -140,8 +142,7 @@ def pipeline_search():
         if len(elements) > max_per_page:
             start_index = (page - 1) * max_per_page
             end_index = start_index + max_per_page
-            if end_index > len(elements):
-                end_index = len(elements)
+            end_index = min(end_index, len(elements))
             elements_on_page = elements[start_index:end_index]
 
     # if element has online platform url, retrieve the cbrain one,
@@ -152,7 +153,7 @@ def pipeline_search():
         zenodo_urls = json.load(f)
 
     for element in elements_on_page:
-        element["platforms"] = [{} for x in range(0, 1)]
+        element["platforms"] = [{} for x in range(1)]
         element["platforms"][0]["img"] = url_for(
             'static', filename="img/run_on_cbrain_gray.png")
         element["platforms"][0]["uri"] = ""
@@ -271,7 +272,7 @@ def pipeline_info():
     # make all keys lowercase
     element = {k.lower(): v for k, v in element.items()}
 
-    element["platforms"] = [{} for x in range(0, 1)]
+    element["platforms"] = [{} for x in range(1)]
     element["platforms"][0]["img"] = url_for(
         'static', filename="img/run_on_cbrain_gray.png")
     element["platforms"][0]["uri"] = ""

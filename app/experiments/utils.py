@@ -7,6 +7,7 @@ from werkzeug.utils import secure_filename
 from .. import config
 from ..models import Experiment
 
+
 def flatten(xs):
   for x in xs:
     if isinstance(x, (list, tuple)):
@@ -15,7 +16,7 @@ def flatten(xs):
       yield x
 
 def upload_file(file: FileStorage) -> str:
-  upload_dir = getattr(config, 'EXPERIMENTS_UPLOAD_DIRECTORY')
+  upload_dir = config.EXPERIMENTS_UPLOAD_DIRECTORY
   if not os.path.isdir(upload_dir):
       os.makedirs(upload_dir)
   file_ext = file.filename.split('.')[-1]

@@ -1,15 +1,16 @@
-# -*- coding: utf-8 -*-
 """Configuration Module
 
 Module that contains the Flask Configuration Class
 """
 import os
+
 from dotenv import load_dotenv
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 load_dotenv(os.path.join(basedir, '.flaskenv'))
 
 
-class Config(object):
+class Config:
     """Configuration class
 
     This class contains all of the global configuration variables needed for

@@ -1,14 +1,14 @@
-import sys
-import os
 #sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 
 import csv
 from datetime import datetime, timedelta
-from app.models import User, Dataset, Pipeline
-from app import db
 
-class InsertTestDataset(object):
+from app import db
+from app.models import Dataset, Pipeline, User
+
+
+class InsertTestDataset:
 
     def __init__(self):
         self.users_file = 'users.csv'

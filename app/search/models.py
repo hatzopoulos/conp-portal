@@ -1,16 +1,14 @@
 import datetime as dt
-from functools import lru_cache
-import os
-import json
-import re
-
 import fnmatch
-from typing import Optional
+import os
+import re
+from functools import lru_cache
 
 import dateutil
 import requests
 
 from app.dats import DATSObject
+
 
 @lru_cache(maxsize=1)
 def _get_latest_test_results(date):
@@ -45,7 +43,7 @@ def get_latest_test_results():
     return _get_latest_test_results(normalized_date)
 
 
-class DatasetCache(object):
+class DatasetCache:
     def __init__(self, current_app):
         self.current_app = current_app
         dataset_cache_dir = current_app.config['DATASET_CACHE_PATH']
@@ -85,7 +83,7 @@ class DATSDataset(DATSObject):
     @property
     def DatsFilepath(self):
         dirs = os.listdir(self.datasetpath)
-        descriptor: Optional[str] = None
+        descriptor: str | None = None
         for file in dirs:
             if fnmatch.fnmatch(file.lower(), 'dats.json'):
                 descriptor = os.path.join(self.datasetpath, file)
@@ -131,7 +129,7 @@ class DATSDataset(DATSObject):
     @property
     def ReadmeFilepath(self):
         dirs = os.listdir(self.datasetpath)
-        readme: Optional[str] = None
+        readme: str | None = None
         for file in dirs:
             if fnmatch.fnmatch(file.lower(), 'readme.md'):
                 readme = os.path.join(self.datasetpath, file)
@@ -252,7 +250,7 @@ class DATSDataset(DATSObject):
         else:
             auth = None
 
-        return "{}".format(auth)
+        return f"{auth}"
 
     @property
     def origin(self):
@@ -406,7 +404,7 @@ class DATSDataset(DATSObject):
         size = round(size, 1)
         unit = units[units.index(unit) + count]
 
-        return "{} {}".format(size, unit)
+        return f"{size} {unit}"
 
     @ property
     def sources(self):
@@ -424,7 +422,7 @@ class DATSDataset(DATSObject):
 
         sources = dist.get('access', {}).get('landingPage', '')
 
-        return "{}".format(sources)
+        return f"{sources}"
 
     @ property
     def dimensions(self):

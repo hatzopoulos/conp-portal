@@ -133,9 +133,7 @@ def __validateMask(mask):
     masks = ['e', 'd']
     checkchar = ['k']
 
-    if not (mask[0] in GENTYPES or mask[0] in masks):
-        raise InvalidTemplateError("Template is invalid.")
-    elif not (mask[-1] in checkchar or mask[-1] in masks):
+    if not (mask[0] in GENTYPES or mask[0] in masks) or not (mask[-1] in checkchar or mask[-1] in masks):
         raise InvalidTemplateError("Template is invalid.")
     else:
         for maskchar in mask[1:-1]:

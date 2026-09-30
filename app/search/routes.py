@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """ Routes Module
 
     Currently this module contains all of the routes in search blueprint
@@ -8,24 +7,28 @@ import os
 import re
 
 from flask import (
+    current_app,
     render_template,
     request,
-    current_app,
     send_from_directory,
     url_for,
 )
 from flask_login import current_user
 
-from app.models import ArkId
-from app.models import Dataset, DatasetAncestry, Experiment
+from app.analytics.routes import datasets_downloads, datasets_views
+from app.models import ArkId, Dataset, DatasetAncestry, Experiment
 from app.search import search_bp
-from app.search.models import DATSDataset, DatasetCache
+from app.search.models import DatasetCache, DATSDataset
 from app.search.queries import (
-    example_query_1, example_query_2, example_query_3, example_query_4, example_query_5
+    example_query_1,
+    example_query_2,
+    example_query_3,
+    example_query_4,
+    example_query_5,
 )
-from app.analytics.routes import datasets_views, datasets_downloads
 from app.services import github
 from config import Config
+
 
 @search_bp.route('/search')
 def search():
@@ -145,9 +148,8 @@ def _ensure_search_index():
         # Index exists but has no documents. Check if we have datasets in
         # the database and populate the index from them. This handles the
         # case where the app was started before CLI setup commands ran.
-        from app import db
-        from app.models import Dataset as DBDataset
         from app.cli import _update_index
+        from app.models import Dataset as DBDataset
 
         if DBDataset.query.count() > 0:
             _update_index(current_app, DBDataset, False)
@@ -168,8 +170,6 @@ def dataset_search_suggestions():
         Retuns:
             JSON containing the matching keywords
     """
-    from whoosh.qparser import MultifieldParser
-    from operator import itemgetter
 
     search_term = request.args.get('search').lower()
     if not search_term:
@@ -227,7 +227,7 @@ def _evidence_publication_types():
                 os.getcwd(),
                 "app/static/datasets/evidence-publication-types.json")) as epf:
             return {k.lower(): v for k, v in json.load(epf).items()}
-    except (IOError, ValueError):
+    except (OSError, ValueError):
         return {}
 
 
@@ -243,7 +243,7 @@ def dataset_search():
         Retuns:
             JSON containing the matching datasets
     """
-    from whoosh.qparser import MultifieldParser, QueryParser
+    from whoosh.qparser import QueryParser
 
     if current_user.is_authenticated:
         authorized = True
@@ -320,7 +320,7 @@ def dataset_search():
 
                 try:
                     zipped = DatasetCache(current_app).getZipLocation(d['datasetPath'])
-                except IOError:
+                except OSError:
                     zipped = None
 
                 show_download_button = zipped is not None
@@ -672,7 +672,7 @@ def dataset_info():
 
     try:
         zipped = DatasetCache(current_app).getZipLocation(d.fspath)
-    except IOError:
+    except OSError:
         zipped = None
 
     show_download_button = zipped is not None
@@ -687,7 +687,7 @@ def dataset_info():
         "title": d.name.replace("'", "\'"),
         "remoteUrl": d.remoteUrl,
         "isPrivate": d.is_private,
-        "thumbnailURL": "/dataset_logo?id={}".format(d.dataset_id),
+        "thumbnailURL": f"/dataset_logo?id={d.dataset_id}",
         "imagePath": "static/img/",
         "downloadPath": d.dataset_id,
         "URL": 'raw_data_url',

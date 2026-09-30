@@ -1,13 +1,13 @@
-from typing import List
 
 from ..models import Experiment
+
 
 class SearchEngine:
 
     def __init__(self) -> None:
         pass
 
-    def search(self, search_term: str, experiments: List[Experiment]):
+    def search(self, search_term: str, experiments: list[Experiment]):
         matching_ids = []
         for experiment in experiments:
             if self.assess_title(search_term, experiment):

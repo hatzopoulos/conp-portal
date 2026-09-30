@@ -1,8 +1,8 @@
 import re
 
-from wtforms.form import Form
 from wtforms.fields import Field
-from wtforms.validators import ValidationError, URL
+from wtforms.form import Form
+from wtforms.validators import URL, ValidationError
 
 
 class ValidDOI(URL):

@@ -1,5 +1,6 @@
 from ..models import Experiment
 
+
 def get_filters(request):
     def is_active(key, option):
         active_options = request.args.get(key)
