@@ -175,7 +175,7 @@ def dataset_search_suggestions():
     if not search_term:
         return json.dumps([])
     else:
-        with open(os.path.join(os.getcwd(), "app/static/datasets/dataset-terms-mapping.json"), "r") as f:
+        with open(os.path.join(os.getcwd(), "app/static/datasets/dataset-terms-mapping.json")) as f:
             dataset_terms_mapping = json.load(f)
             f.close()
 
@@ -260,7 +260,7 @@ def dataset_search():
             dataset_id=request.args.get('id')
         ).all()
     else:
-        with open(os.path.join(os.getcwd(), "app/static/datasets/dataset-terms-mapping.json"), "r") as f:
+        with open(os.path.join(os.getcwd(), "app/static/datasets/dataset-terms-mapping.json")) as f:
             dataset_terms_mapping = json.load(f)
             f.close()
 
@@ -662,7 +662,7 @@ def dataset_info():
         authorized = False
 
     # @todo:ant: add to config
-    with open(os.path.join(os.getcwd(), "app/static/datasets/dataset-cbrain-ids.json"), "r") as f:
+    with open(os.path.join(os.getcwd(), "app/static/datasets/dataset-cbrain-ids.json")) as f:
         cbrain_dataset_ids = json.load(f)
         f.close()
 
@@ -924,7 +924,7 @@ def get_dataset_readme(dataset_id):
     readme_filepath = datsdataset.ReadmeFilepath
 
     try:
-        with open(readme_filepath, 'r') as f:
+        with open(readme_filepath) as f:
             readme = f.read()
             content = github.render_content(readme)
             return content

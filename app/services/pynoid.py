@@ -135,7 +135,7 @@ def __validateMask(mask):
         raise InvalidTemplateError("Template is invalid.")
     else:
         for maskchar in mask[1:-1]:
-            if not (maskchar in masks):
+            if maskchar not in masks:
                 raise InvalidTemplateError("Template is invalid.")
 
     return True

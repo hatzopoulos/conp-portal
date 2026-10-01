@@ -13,6 +13,7 @@ from boutiques.searcher import Searcher
 # Create a dedicated logger for this specific module
 logger = logging.getLogger(__name__)
 
+
 class UpdatePipelineData(threading.Thread):
     """
         Class that handles the threaded updating of the Pipeline
@@ -42,7 +43,7 @@ class UpdatePipelineData(threading.Thread):
             # fetch every single descriptor into one file
             detailed_all_descriptors = []
             for f in files:
-                with open(f, 'r') as file:
+                with open(f) as file:
                     detailed_all_descriptors.append(json.load(file))
 
             # store data in cache

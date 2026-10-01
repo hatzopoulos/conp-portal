@@ -110,7 +110,7 @@ def view(experiment_id):
 
     if os.path.exists(readme_path):
         try:
-            with open(readme_path, 'r') as file:
+            with open(readme_path) as file:
                 readme_content = file.read()
         except Exception as e:
             print(e)  # Il est préférable de loguer l'exception plutôt que de passer silencieusement

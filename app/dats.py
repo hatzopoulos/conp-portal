@@ -13,7 +13,7 @@ class DATSObject:
 
         self.datasetpath = datasetpath
 
-        with open(self.DatsFilepath, 'r') as f:
+        with open(self.DatsFilepath) as f:
             try:
                 self.descriptor = json.load(f)
             except Exception:

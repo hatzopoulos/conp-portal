@@ -86,14 +86,14 @@ def pipeline_search():
         filter(lambda e: (not e.get("DEPRECATED", None)), elements))
 
     if request.args.get('cbrain'):
-        with open(os.path.join(os.getcwd(), "app/static/pipelines/cbrain-conp-pipeline.json"), "r") as f:
+        with open(os.path.join(os.getcwd(), "app/static/pipelines/cbrain-conp-pipeline.json")) as f:
             zenodo_urls = json.load(f)
         elements = list(
             filter(lambda e: e["ID"] in zenodo_urls.keys(), elements)
         )
 
     blocked_pipelines_ids = list()
-    with open(os.path.join(os.getcwd(), "app/static/pipelines/block-list-pipeline.json"), "r") as f:
+    with open(os.path.join(os.getcwd(), "app/static/pipelines/block-list-pipeline.json")) as f:
         blocked_pipelines_ids = json.load(f)
     blocked_pipelines_indexes = list()
     for index, element in enumerate(elements):
@@ -149,7 +149,7 @@ def pipeline_search():
     # else take the first one and set logo
     # TODO right now, this handles CBRAIN and one other platform
 
-    with open(os.path.join(os.getcwd(), "app/static/pipelines/cbrain-conp-pipeline.json"), "r") as f:
+    with open(os.path.join(os.getcwd(), "app/static/pipelines/cbrain-conp-pipeline.json")) as f:
         zenodo_urls = json.load(f)
 
     for element in elements_on_page:
@@ -277,7 +277,7 @@ def pipeline_info():
         'static', filename="img/run_on_cbrain_gray.png")
     element["platforms"][0]["uri"] = ""
 
-    with open(os.path.join(os.getcwd(), "app/static/pipelines/cbrain-conp-pipeline.json"), "r") as f:
+    with open(os.path.join(os.getcwd(), "app/static/pipelines/cbrain-conp-pipeline.json")) as f:
         zenodo_urls = json.load(f)
 
     if element["id"] in zenodo_urls.keys():

@@ -288,7 +288,7 @@ def _update_datalad_objects(
             continue
 
         try:
-            with open(os.path.join(ds['path'], descriptor), 'r') as f:
+            with open(os.path.join(ds['path'], descriptor)) as f:
                 dats = json.load(f)
         except Exception as e:
             print("\033[91m")
@@ -471,7 +471,7 @@ def _update_index(
     writer = ix.writer()
     datasets = DBDataset.query.order_by(DBDataset.id).all()
 
-    with open(os.path.join(os.getcwd(), "app/static/datasets/dataset-cbrain-ids.json"), "r") as f:
+    with open(os.path.join(os.getcwd(), "app/static/datasets/dataset-cbrain-ids.json")) as f:
         cbrain_dataset_ids = json.load(f)
         f.close()
 

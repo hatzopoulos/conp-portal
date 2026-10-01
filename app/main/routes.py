@@ -145,10 +145,10 @@ def about():
     all_detailed_desc_path = os.path.join(
         cache_dir, "detailed_all_descriptors.json")
 
-    with open(all_desc_path, "r") as f:
+    with open(all_desc_path) as f:
         all_descriptors = json.load(f)
 
-    with open(all_detailed_desc_path, "r") as f:
+    with open(all_detailed_desc_path) as f:
         detailed_all_descriptors = json.load(f)
 
     elements = [
