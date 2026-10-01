@@ -196,7 +196,7 @@ def dataset_search_suggestions():
                     datasets.add(s)
 
             # Adding mapping terms
-            for t in dataset_terms_mapping.keys():
+            for t in dataset_terms_mapping:
                 if search_term in t:
                     suggestions.add(t)
 
@@ -243,7 +243,11 @@ def dataset_search():
         Retuns:
             JSON containing the matching datasets
     """
-    from whoosh.qparser import QueryParser
+    import logging
+
+    from whoosh.qparser import QueryParser, QueryParserError
+
+    logger = logging.getLogger(__name__)
 
     if current_user.is_authenticated:
         authorized = True
@@ -276,7 +280,7 @@ def dataset_search():
                     # Search prefix
                     s = search_term + '*'
 
-                for t in dataset_terms_mapping.keys():
+                for t in dataset_terms_mapping:
                     if search_term in t:
                         s = s + ' OR "' + dataset_terms_mapping[t] + '"'
 
@@ -286,9 +290,8 @@ def dataset_search():
                         parser = QueryParser(field, ix.schema)
                         myquery = parser.parse(s)
                         _datasets.extend(searcher.search(myquery, limit=None))
-                    except Exception as e:
-                        print(e)
-                        print('Cannot perform term search ' + s + ' in field ' + field)
+                    except QueryParserError as e:
+                        logger.warning("Cannot perform term search %s in field %s: %s", s, field, e)
 
                 ds = set()
                 ds_add = ds.add
@@ -325,7 +328,7 @@ def dataset_search():
 
                 show_download_button = zipped is not None
                 # @todo: /data/ Should not be hard-coded. This is a temporary solution to get the zip location. The zip location should be stored in the database and retrieved from there.
-                zip_location = '/data/{0}'.format(os.path.basename(zipped or ''))
+                zip_location = '/data/{}'.format(os.path.basename(zipped or ''))
 
                 dataset = {
                     "authorized": authorized,
@@ -379,7 +382,7 @@ def dataset_search():
             continue
         for m in e['modalities']:
             modalities.append(m.lower())
-    modalities = sorted(list(set(modalities)))
+    modalities = sorted(set(modalities))
 
     formats = []
     # by default, formats should be represented in upper case
@@ -398,7 +401,7 @@ def dataset_search():
                 formats.append('RNA-Seq')
             else:
                 formats.append(m.upper())
-    formats = sorted(list(set(formats)), key=str.casefold)
+    formats = sorted(set(formats), key=str.casefold)
 
     authorizations = ['Yes', 'No']
 
@@ -658,12 +661,13 @@ def dataset_info():
     else:
         authorized = False
 
+    # @todo:ant: add to config
     with open(os.path.join(os.getcwd(), "app/static/datasets/dataset-cbrain-ids.json"), "r") as f:
         cbrain_dataset_ids = json.load(f)
         f.close()
 
     datasetTitle = d.name.replace("'", "")
-    if datasetTitle in cbrain_dataset_ids.keys():
+    if datasetTitle in cbrain_dataset_ids:
         dataset_cbrain_id = cbrain_dataset_ids[datasetTitle]
     else:
         dataset_cbrain_id = ""
@@ -677,7 +681,7 @@ def dataset_info():
 
     show_download_button = zipped is not None
     # @todo: This is a temporary solution to get the zip location. The zip location should be stored in the database and retrieved from there.
-    zip_location = '/data/{0}'.format(os.path.basename(zipped or ''))
+    zip_location = '/data/{}'.format(os.path.basename(zipped or ''))
 
     dataset = {
         "authorized": authorized,
@@ -898,14 +902,14 @@ def get_dataset_metadata_information(dataset):
         "remoteUrl": dataset.remoteUrl,
         "registrationPage": datsdataset.registrationPage,
         "downloadOptions": datsdataset.downloadOptions,
-        "registrationEmail": True if datsdataset.registrationPage and re.match(r"[^@]+@[^@]+\.[^@]+", datsdataset.registrationPage) else False
+        "registrationEmail": bool(datsdataset.registrationPage and re.match(r"[^@]+@[^@]+\.[^@]+", datsdataset.registrationPage))
     }
 
 
 def parse_field(field):
     try:
         return json.loads(field)
-    except:
+    except (json.JSONDecodeError, TypeError):
         return field
 
 
@@ -919,12 +923,10 @@ def get_dataset_readme(dataset_id):
 
     readme_filepath = datsdataset.ReadmeFilepath
 
-    f = open(readme_filepath, 'r')
-    if f.mode != 'r':
+    try:
+        with open(readme_filepath, 'r') as f:
+            readme = f.read()
+            content = github.render_content(readme)
+            return content
+    except FileNotFoundError:
         return 'Readme Not Found', 404
-
-    readme = f.read()
-
-    content = github.render_content(readme)
-
-    return content

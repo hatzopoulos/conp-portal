@@ -35,7 +35,7 @@ class Config:
     # @todo: Remove shawntbrown@gmail.com - This should be set to a real email address for production.
     MAIL_DEFAULT_SENDER = '"CONP-PCNO Portal" <shawntbrown@gmail.com>'
     # @todo: Verify and document this email address: conp-test@mailinator.com
-    ADMINS = [os.environ.get('ADMIN_EMAIL')] or ['conp-test@mailinator.com']
+    ADMINS = (os.environ.get('ADMIN_EMAIL') or 'conp-test@mailinator.com',)
     LOG_TO_STDOUT = True
     TEMPLATES_AUTO_RELOAD = True
 

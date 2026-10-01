@@ -10,6 +10,7 @@ SHORT = ''
 VERSION = 'pynoid 0.1'
 NOLIMIT = float('inf')
 
+
 def mint(template='zek', n=None, scheme=None, naa=None):
     """
     Mint identifiers according to template with a prefix of scheme + naa.
@@ -47,12 +48,9 @@ nn
         mask = template
         prefix = ''
 
-    try:
-        __validateMask(mask)
-    except Exception:
-        raise
+    __validateMask(mask)
 
-    if n == None:
+    if n is None:
         if mask[0] in (GENTYPES):
             mask = mask[1:]
         # If we hit this point, this is a random (and therefore, short-term) identifier.

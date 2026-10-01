@@ -144,7 +144,7 @@ class DATSDataset(DATSObject):
     def creators(self):
         creators = []
         c = self.descriptor.get('creators', '')
-        if type(c) == list:
+        if isinstance(c, list):
             for x in c:
                 if 'name' in x:
                     creators.append(x['name'])
@@ -334,7 +334,7 @@ class DATSDataset(DATSObject):
 
         return formats
 
-    @ property
+    @property
     def licenses(self):
         licenses = []
         lics = self.descriptor.get('licenses', None)
@@ -353,7 +353,7 @@ class DATSDataset(DATSObject):
 
         return licenses
 
-    @ property
+    @property
     def modalities(self):
         modalities = []
         for t in self.descriptor.get('types', []):
@@ -364,7 +364,7 @@ class DATSDataset(DATSObject):
 
         return modalities if len(modalities) > 0 else None
 
-    @ property
+    @property
     def keywords(self):
         keywords = []
         for t in self.descriptor.get('keywords', []):
@@ -374,7 +374,7 @@ class DATSDataset(DATSObject):
 
         return keywords if len(keywords) > 0 else None
 
-    @ property
+    @property
     def size(self):
         dists = self.descriptor.get('distributions', None)
         if dists is None:
@@ -406,7 +406,7 @@ class DATSDataset(DATSObject):
 
         return f"{size} {unit}"
 
-    @ property
+    @property
     def sources(self):
         dists = self.descriptor.get('distributions', None)
         if dists is None:
@@ -424,7 +424,7 @@ class DATSDataset(DATSObject):
 
         return f"{sources}"
 
-    @ property
+    @property
     def dimensions(self):
         dimensions = []
         for t in self.descriptor.get('dimensions', []):
@@ -435,7 +435,7 @@ class DATSDataset(DATSObject):
 
         return dimensions if len(dimensions) > 0 else None
 
-    @ property
+    @property
     def isAbout(self):
         isAbout = []
         for t in self.descriptor.get('isAbout', []):
@@ -445,7 +445,7 @@ class DATSDataset(DATSObject):
 
         return isAbout if len(isAbout) > 0 else None
 
-    @ property
+    @property
     def spatialCoverage(self):
         spatialCoverage = []
         for t in self.descriptor.get('spatialCoverage', []):
@@ -455,7 +455,7 @@ class DATSDataset(DATSObject):
 
         return spatialCoverage if len(spatialCoverage) > 0 else None
 
-    @ property
+    @property
     def acknowledges(self):
         acknowledges = []
         for t in self.descriptor.get('acknowledges', []):
@@ -467,7 +467,7 @@ class DATSDataset(DATSObject):
 
         return acknowledges if len(acknowledges) > 0 else None
 
-    @ property
+    @property
     def producedBy(self):
         producedBy = []
         field_data = self.descriptor.get('producedBy', None)
@@ -482,7 +482,7 @@ class DATSDataset(DATSObject):
 
         return producedBy if len(producedBy) > 0 else None
 
-    @ property
+    @property
     def subjectCount(self):
         count = 0
         extraprops = self.descriptor.get('extraProperties', {})
@@ -498,7 +498,7 @@ class DATSDataset(DATSObject):
                         count += x['value']
         return count if count > 0 else None
 
-    @ property
+    @property
     def derivedFrom(self):
         derivedFrom = []
         extraprops = self.descriptor.get('extraProperties', {})
@@ -509,7 +509,7 @@ class DATSDataset(DATSObject):
 
         return derivedFrom if len(derivedFrom) > 0 else None
 
-    @ property
+    @property
     def parentDatasetId(self):
         parentDatasetId = []
         extraprops = self.descriptor.get('extraProperties', {})
@@ -521,7 +521,7 @@ class DATSDataset(DATSObject):
 
         return parentDatasetId if len(parentDatasetId) > 0 else None
 
-    @ property
+    @property
     def version(self):
         return self.descriptor.get('version', None)
 
@@ -535,7 +535,7 @@ class DATSDataset(DATSObject):
 
         return dates if len(dates) > 0 else None
 
-    @ property
+    @property
     def schema_org_metadata(self):
         """ Returns json-ld metadata snippet for Google dataset search. """
         try:
